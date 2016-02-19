@@ -122,8 +122,7 @@ app.get("/blogs/:id/edit", isLoggedIn, function(req, res){
                 res.redirect("/blogs");
             } else {
                 // does user own the blog post? 
-               // console.log(foundBlog.author.id);
-                //console.log(req.user._id);
+                console.log(req.user._id);
                 res.render("edit", {blog: foundBlog});
             }
         });
