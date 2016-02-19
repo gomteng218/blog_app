@@ -77,18 +77,26 @@ app.get("/blogs", function(req, res){
 });
 
 // NEW ROUTE
-app.get ("/blogs/new", function(req, res){
+app.get ("/blogs/new", isLoggedIn, function(req, res){
     res.render("new");
 });
 // CREATE ROUTE
 app.post("/blogs", isLoggedIn, function(req, res){
+    var title = req.body.title;
+    var image = req.body.image;
+    var content = req.body.content;
+    var author = {
+        id: req.user._id,
+        username: req.user.username
+    };
+    var newBlog = {title: title, image: image, content: content, author: author};
     // CREATE BLOG
-    console.log(req.body);
     req.body.blog.content = req.sanitize(req.body.blog.content);
     Blog.create(req.body.blog, function(err, newBlog){
         if(err){
             res.render("new");
         } else {
+            console.log(newBlog);
             res.redirect("/blogs");
         }
     });
@@ -107,13 +115,24 @@ app.get("/blogs/:id", function(req, res){
 
 // EDIT ROUTE
 app.get("/blogs/:id/edit", isLoggedIn, function(req, res){
-    Blog.findById(req.params.id, function(err, foundBlog){
-        if(err){
-            res.redirect("/blogs");
-        } else {
-            res.render("edit", {blog: foundBlog});
-        }
-    });
+    // is user logged in
+    if(req.isAuthenticated()){
+        Blog.findById(req.params.id, function(err, foundBlog){
+            if(err){
+                res.redirect("/blogs");
+            } else {
+                // does user own the blog post? 
+               // console.log(foundBlog.author.id);
+                //console.log(req.user._id);
+                res.render("edit", {blog: foundBlog});
+            }
+        });
+    } else {
+        res.send("You need to be logged in to do that!");
+    }
+        
+        // otherwise, redirect
+    // if not, redirect
 });
 
 // UPDATE ROUTE
@@ -142,7 +161,7 @@ app.delete("/blogs/:id", isLoggedIn, function(req, res){
 
 // AUTH ROUTES
 
-// SHOW REGISTER FORM
+/* SHOW REGISTER FORM
 app.get("/register", function(req, res){
     res.render("register");
 });
@@ -158,7 +177,7 @@ app.post("/register", function(req, res){
             res.redirect("/blogs");
         });
     });
-});
+});*/
 
 // SHOW LOGIN FORM
 app.get("/login", function(req, res){

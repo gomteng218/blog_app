@@ -13,8 +13,8 @@
             </div>
             <div class="ui container">
                 <% if(!currentUser){ %>
-                    <a href="/register" class="item right">Register</a>
-                    <a href="/login" class="item">Log In</a>
+                 <%#   <a href="/register" class="item right">Register</a> %>
+                    <a href="/login" class="item right">Log In</a>
                 <% } else { %>
                     <a href="#" class="item right">Signed In As <%= currentUser.username %></a>
                     <a href="/logout" class="item right">Log Out</a>
