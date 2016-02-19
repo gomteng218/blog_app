@@ -10,8 +10,8 @@ var express         = require("express")
 
 
 // APP CONFIG
-//mongoose.connect("mongodb://pil:pilking@ds055525.mongolab.com:55525/pilblog");
-mongoose.connect("mongodb://localhost/blogApp");
+mongoose.connect("mongodb://pil:pilking@ds055525.mongolab.com:55525/pilblog");
+//mongoose.connect("mongodb://localhost/blogApp");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.set("port", (process.env.PORT || 3000));
