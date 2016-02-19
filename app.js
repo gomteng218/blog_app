@@ -11,6 +11,7 @@ mongoose.connect("mongodb://pil:pilking@ds055525.mongolab.com:55525/pilblog");
 //mongoose.connect("mongodb://localhost/blogApp");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.set("port", (process.env.PORT || 3000));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
 app.use(methodOverride("_method"));
@@ -119,7 +120,6 @@ app.delete("/blogs/:id", function(req, res){
     });
 });
 
-
-app.listen(node.env.PORT, node.env.IP, function(){
-    console.log("Server is Running");
-})
+app.listen(app.get("port"), function(){
+    console.log("SERVER IS RUNNING", app.get("port"));
+});
