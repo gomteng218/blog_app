@@ -7,7 +7,8 @@ var express         = require("express")
 
 
 // APP CONFIG
-mongoose.connect("mongodb://localhost/blogApp");
+//mongoose.connect("mongodb://localhost/blogApp");
+mongoose.connect("mongodb://pil:pilking@ds055525.mongolab.com:55525/pilblog");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
