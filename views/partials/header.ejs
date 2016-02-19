@@ -6,9 +6,18 @@
     </head>
     <body>
         <div class="ui fixed inverted menu">
-            <div class="ui container">
+            <div class="ui container left">
                 <div class="header item"><i class="cloud icon"></i>Pil's Blog</div>
                 <a href="/" class="item">Home</a>
                 <a href="/blogs/new" class="item">New Post</a>
+            </div>
+            <div class="ui container">
+                <% if(!currentUser){ %>
+                    <a href="/register" class="item right">Register</a>
+                    <a href="/login" class="item">Log In</a>
+                <% } else { %>
+                    <a href="#" class="item right">Signed In As <%= currentUser.username %></a>
+                    <a href="/logout" class="item right">Log Out</a>
+                <% } %>
             </div>
         </div>
