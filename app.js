@@ -120,6 +120,6 @@ app.delete("/blogs/:id", function(req, res){
 });
 
 
-app.listen(3000, function(){
+app.listen(node.env.PORT, node.env.IP, function(){
     console.log("Server is Running");
 })
