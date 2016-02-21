@@ -10,7 +10,7 @@ var express         = require("express")
 
 
 // APP CONFIG
-mongoose.connect("mongodb://")
+mongoose.connect(process.env.MONGOLAB_URI);
 //mongoose.connect("mongodb://localhost/blogApp");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
